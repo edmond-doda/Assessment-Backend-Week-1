@@ -59,13 +59,15 @@ def finds_weekday():
     add_to_history(request)
     data = request.json
 
-    if not data:
-        return jsonify({"error": "Request body required"}), 400
+    if (not data) or ('date' not in data):
+        return jsonify({"error": "Missing required data."}), 400
 
-    date_object = convert_to_datetime(data['date'])
-    day = get_day_of_week_on(date_object)
-
-    return jsonify({"weekday": day}), 201
+    try:
+        date_object = convert_to_datetime(data['date'])
+        day = get_day_of_week_on(date_object)
+        return jsonify({"weekday": day}), 200
+    except Exception:
+        return jsonify({'error': 'Unable to convert value to datetime.'}), 400
 
 
 @app.get('/history')
