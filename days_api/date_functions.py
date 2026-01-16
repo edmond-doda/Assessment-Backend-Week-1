@@ -7,7 +7,7 @@ def convert_to_datetime(date_val: str) -> datetime:
     try:
         date_object = datetime.strptime(date_val, "%d.%m.%Y")
         return date_object
-    except ValueError or AttributeError:
+    except ValueError:
         raise ValueError("Unable to convert value to datetime.")
 
 
