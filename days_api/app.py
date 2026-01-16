@@ -36,7 +36,7 @@ def index():
 
 
 @app.post('/between')
-def finds_dates_between():
+def between():
     """Returns the number of days between two dates"""
     add_to_history(request)
     data = request.json
@@ -54,7 +54,7 @@ def finds_dates_between():
 
 
 @app.post('/weekday')
-def finds_weekday():
+def weekday():
     """Returns the weekday of a date"""
     add_to_history(request)
     data = request.json
@@ -71,18 +71,22 @@ def finds_weekday():
 
 
 @app.get('/history')
-def get_history():
+def history():
     """Returns details on the last x amount of requests"""
+    add_to_history(request)
+
     args = request.args.to_dict()
-    number = args.get("number")
+    number = args.get("number", "5")
 
-    if not number:
-        number = 5
+    try:
+        number = int(number)
+    except Exception:
+        return jsonify({"error": "Number must be an integer between 1 and 20."}), 400
 
-    if (number < 1) or (number > 20):
-        return {"error": "Number must be between 1 and 20"}, 400
+    if number < 1 or number > 20:
+        return jsonify({"error": "Number must be an integer between 1 and 20."}), 400
 
-    return jsonify(app_history[-number:]), 200
+    return jsonify(app_history[-number:][::-1]), 200
 
 
 @app.delete('/history')
