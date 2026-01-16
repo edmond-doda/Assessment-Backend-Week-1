@@ -1,32 +1,31 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.12.12, pytest-9.0.1, pluggy-1.6.0
+platform linux -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0
 rootdir: /home/runner/work/Assessment-Backend-Week-1/Assessment-Backend-Week-1
 collected 112 items
 
-days_api/test_api.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 45%]
-FFFFFFFFFFFFFFFFFFFFFF                                                   [ 65%]
-days_api/test_date_functions.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF  [100%]
+days_api/test_api.py ................................................... [ 45%]
+...........FFFFFFFFFFF                                                   [ 65%]
+days_api/test_date_functions.py .......................................  [100%]
 
-============================= 112 failed in 0.33s ==============================
+======================== 11 failed, 101 passed in 0.27s ========================
 ************* Module app
+days_api/app.py:52:11: W0718: Catching too general exception Exception (broad-exception-caught)
+days_api/app.py:69:11: W0718: Catching too general exception Exception (broad-exception-caught)
+days_api/app.py:83:11: W0718: Catching too general exception Exception (broad-exception-caught)
+days_api/app.py:93:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/app.py:99:0: C0116: Missing function or method docstring (missing-function-docstring)
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
-days_api/app.py:7:0: W0611: Unused request imported from flask (unused-import)
-days_api/app.py:9:0: W0611: Unused convert_to_datetime imported from date_functions (unused-import)
-days_api/app.py:9:0: W0611: Unused get_day_of_week_on imported from date_functions (unused-import)
-days_api/app.py:9:0: W0611: Unused get_days_between imported from date_functions (unused-import)
-days_api/app.py:9:0: W0611: Unused get_current_age imported from date_functions (unused-import)
 ************* Module date_functions
 days_api/date_functions.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/date_functions.py:6:24: W0613: Unused argument 'date_val' (unused-argument)
-days_api/date_functions.py:10:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/date_functions.py:10:21: W0613: Unused argument 'first' (unused-argument)
-days_api/date_functions.py:10:38: W0613: Unused argument 'last' (unused-argument)
+days_api/date_functions.py:11:8: W0707: Consider explicitly re-raising using 'except ValueError as exc' and 'raise ValueError('Unable to convert value to datetime.') from exc' (raise-missing-from)
 days_api/date_functions.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/date_functions.py:14:23: W0613: Unused argument 'date_val' (unused-argument)
-days_api/date_functions.py:18:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/date_functions.py:18:20: W0613: Unused argument 'birthdate' (unused-argument)
+days_api/date_functions.py:19:8: W0707: Consider explicitly re-raising using 'except TypeError as exc' and 'raise TypeError('Datetimes required.') from exc' (raise-missing-from)
+days_api/date_functions.py:22:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/date_functions.py:27:8: W0707: Consider explicitly re-raising using 'except TypeError as exc' and 'raise TypeError('Datetime required.') from exc' (raise-missing-from)
+days_api/date_functions.py:30:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/date_functions.py:3:0: W0611: Unused timedelta imported from datetime (unused-import)
 
 -----------------------------------
-Your code has been rated at 3.33/10
+Your code has been rated at 8.31/10
 
