@@ -41,14 +41,16 @@ def finds_dates_between():
     add_to_history(request)
     data = request.json
 
-    if not data:
-        return {"error": "Request body required"}, 400
+    if 'first' not in data or 'last' not in data:
+        return jsonify({"error": "Missing required data."}), 400
 
-    first_date = convert_to_datetime(data['first'])
-    last_date = convert_to_datetime(data['last'])
-    days = get_days_between(first_date, last_date)
-
-    return {"days": days}, 201
+    try:
+        first_date = convert_to_datetime(data['first'])
+        last_date = convert_to_datetime(data['last'])
+        days = get_days_between(first_date, last_date)
+        return jsonify({"days": days}), 200
+    except Exception:
+        return jsonify({"error": "Unable to convert value to datetime."}), 400
 
 
 @app.post('/weekday')
@@ -58,12 +60,12 @@ def finds_weekday():
     data = request.json
 
     if not data:
-        return {"error": "Request body required"}, 400
+        return jsonify({"error": "Request body required"}), 400
 
     date_object = convert_to_datetime(data['date'])
     day = get_day_of_week_on(date_object)
 
-    return {"weekday": day}, 201
+    return jsonify({"weekday": day}), 201
 
 
 @app.get('/history')
@@ -78,13 +80,13 @@ def get_history():
     if (number < 1) or (number > 20):
         return {"error": "Number must be between 1 and 20"}, 400
 
-    return app_history[-number:], 200
+    return jsonify(app_history[-number:]), 200
 
 
 @app.delete('/history')
 def delete_history():
     clear_history()
-    return {"status": "History cleared"}, 200
+    return jsonify({"status": "History cleared"}), 200
 
 
 @app.get("/current_age")
@@ -97,7 +99,7 @@ def get_age():
     date_object = convert_to_datetime(data['date'])
     age = get_current_age(date_object)
 
-    return {'current age': age}, 200
+    return jsonify({'current age': age}), 200
 
 
 if __name__ == "__main__":
